@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "555208326356",
+    "project_id": "shopping-advisor-c590e",
+    "storage_bucket": "shopping-advisor-c590e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:555208326356:android:e137bff81a1ce11f5f8f41",
+        "android_client_info": {
+          "package_name": "com.example.sa"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "555208326356-5lnh0pr8as6oa5n0v6085da93a7dl59u.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.sa",
+            "certificate_hash": "667f24bf0f3f83a5b9fbeb204075e921794f6a20"
+          }
+        },
+        {
+          "client_id": "555208326356-7qtdk7eg8ai6hdoeqb3p27vt18v67kfm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD2vKRFk9Tf8DPLrbQLwep73494Z7yf_9M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "555208326356-7qtdk7eg8ai6hdoeqb3p27vt18v67kfm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
