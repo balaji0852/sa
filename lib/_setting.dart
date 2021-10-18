@@ -1,10 +1,20 @@
 // ignore: camel_case_types
 class simple {
-  static List<String> preferredItem = ["flag"];
+  static List<String> preferredItem = ["flag", "shirt"];
   static List<String> preferredCities = ["flag"];
   static double minPriceRange = 299;
   static double maxPriceRange = 999;
   static List<item> items = [];
+  static int currentPageIndex = 0;
+
+  //current item
+  static item? currentItem;
+
+  //storing
+  static List<int> wishListItemKey = [0];
+
+  //search query
+  static String? searchString;
 }
 
 // ignore: camel_case_types

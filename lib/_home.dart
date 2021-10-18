@@ -23,13 +23,28 @@ class HomePage extends State<Home> {
   static const String appName = "sa";
   static final List<Widget> _widgetOptions = <Widget>[
     HomeActivity(),
-    SuggestionPage(),
-    wishListPage()
+    HomeActivity(),
+    HomeActivity(),
+    HomeActivity()
   ];
+  bool searchActive = false;
 
   void _onItemTapped(int index) {
     setState(() {
-      _selectedIndex = index;
+      if (index == 3) {
+        _selectedIndex = 2;
+      } else {
+        _selectedIndex = index;
+      }
+      if (index == 0) {
+        simple.currentPageIndex = 0;
+      } else if (index == 1) {
+        simple.currentPageIndex = 1;
+      } else if (index == 2) {
+        simple.currentPageIndex = 2;
+      } else {
+        simple.currentPageIndex = 3;
+      }
     });
   }
 
@@ -59,7 +74,73 @@ class HomePage extends State<Home> {
         title: const Text(appName, style: TextStyle(color: Colors.black)),
         backgroundColor: Colors.white,
         actions: <Widget>[
-          IconButton(
+          if (!searchActive)
+            IconButton(
+              onPressed: () {
+                setState(() {
+                  searchActive = true;
+                });
+              },
+              icon: const Icon(
+                Icons.search,
+                color: Colors.black,
+              ),
+            ),
+          if (searchActive)
+            Container(
+              width: MediaQuery.of(context).size.width - 60,
+              child: Row(
+                mainAxisSize: MainAxisSize.max,
+                children: [
+                  Container(
+                      height: 60,
+                      width: MediaQuery.of(context).size.width - 160,
+                      color: Colors.white,
+                      child: TextField(
+                        cursorColor: Colors.green,
+                        decoration: const InputDecoration(
+                          enabledBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(color: Colors.green),
+                          ),
+                          focusedBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(color: Colors.green),
+                          ),
+                        ),
+                        onChanged: (value) {
+                          setState(() {
+                            simple.searchString = value.toLowerCase();
+                          });
+                        },
+                      )),
+                  IconButton(
+                    onPressed: () {
+                      setState(() {
+                        searchActive = true;
+                        _onItemTapped(3);
+                      });
+                    },
+                    icon: const Icon(
+                      Icons.search,
+                      color: Colors.black,
+                    ),
+                  ),
+                  IconButton(
+                    onPressed: () {
+                      setState(() {
+                        searchActive = false;
+                        _onItemTapped(0);
+                      });
+                    },
+                    icon: const Icon(
+                      Icons.close,
+                      color: Colors.black,
+                    ),
+                  )
+                ],
+              ),
+            ),
+          if (!searchActive)
+            IconButton(
               onPressed: () {
                 Navigator.pop(context);
                 Navigator.push(
@@ -70,16 +151,18 @@ class HomePage extends State<Home> {
               icon: const Icon(
                 Icons.filter,
                 color: Colors.black,
-              )),
-          MaterialButton(
-            onPressed: signOut,
-            child: CircleAvatar(
-              backgroundImage: NetworkImage(
-                  FirebaseAuth.instance.currentUser!.photoURL.toString()),
-              backgroundColor: Colors.white,
-              radius: 16,
+              ),
             ),
-          )
+          if (!searchActive)
+            MaterialButton(
+              onPressed: signOut,
+              child: CircleAvatar(
+                backgroundImage: NetworkImage(
+                    FirebaseAuth.instance.currentUser!.photoURL.toString()),
+                backgroundColor: Colors.white,
+                radius: 16,
+              ),
+            )
         ],
       ),
       body: Center(
@@ -111,12 +194,12 @@ class HomePage extends State<Home> {
     var request = http.Request('GET',
         Uri.parse('https://shoppingadvisor.azurewebsites.net/api/getitems'));
 
-    http.StreamedResponse response = await request.send();
+    //http.StreamedResponse response = await request.send();
 
     // var jsonResponse =
     //     convert.jsonDecode(await response.stream.bytesToString());
     List<item> items = [];
-    // ignore: avoid_types_as_parameter_names
+    // //ignore: avoid_types_as_parameter_names
     // print(items);
     // await convert
     //     .jsonDecode(await response.stream.bytesToString())['items']
